@@ -38,13 +38,13 @@ def get_weather(city, state=None, country=None, meta_data_token=None, meta_data=
         wind_speed = round(wind_kmh * 0.621371) if isinstance(wind_kmh, (int, float)) else "unknown"
         condition = weather.get("conditions", "clear skies")
         
-        sarcasm = [
-            f"Oh wow, it's {temp}°F in {city}. Bet you didn't see that coming!",
-            f"Humidity at {humidity}%. Your hair is going to love this!",
-            f"Wind speed is {wind_speed} mph. Hold onto your hats, or don't, I'm not your mother!",
-            f"Looks like {condition}. Guess you'll survive another day." 
+        weather_info = [
+            f"Oh wow, it's {temp}°F in {city}. ",
+            f"Humidity at {humidity}%. ",
+            f"Wind speed is {wind_speed} mph.",
+            f"Looks like {condition}." 
         ]
-        return " ".join(sarcasm), {}
+        return " ".join(weather_info), {}
     
     return f"Oh great, {city} doesn't exist... or maybe you just can't spell? Try again!", {}
 
