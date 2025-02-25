@@ -11,6 +11,7 @@
 7. [Sample Queries & Responses](#sample-queries--responses)
 8. [AI System Prompt](#ai-system-prompt)
 9. [Conclusion](#conclusion)
+10. [SignalWire Dashboard](#SignalWire-Dashboard-Settings)
 
 ---
 
@@ -153,3 +154,52 @@ Greet the user with a and ask for the city they want the weather for.git "*
 The AI Weather Agent not only keeps you informed but also entertained. Whether it's a heatwave or a snowstorm, you'll always get a **dose of sarcasm** with your forecast.
 
 Ready to launch? Fire up the bot and let the snark begin!
+
+
+## SignalWire Dashboard Settings
+
+1. Go to `Resources` left side tab.
+
+<img src="https://github.com/user-attachments/assets/b5dd5804-207a-42b0-a22c-f4575bd3a225" alt="image" style="width:15%;">
+
+
+2. Click the button `Add New`
+
+<img src="https://github.com/user-attachments/assets/07eea87d-b2fc-4a92-8c7a-dfb97c462eaa" alt="image" style="width:15%;">
+
+
+3. Choose `AI Agent`
+
+<img src="https://github.com/user-attachments/assets/a0dc60a6-a871-402c-8ec7-07da15e8113e" alt="image" style="width:50%;">
+
+
+4. Choose `Custom AI Agent`
+
+<img src="https://github.com/user-attachments/assets/a5ee97ff-3d06-4c10-86a7-ba6c6422d99b" alt="image" style="width:50%;">
+
+
+5. Click the `functions` tab
+
+<img src="https://github.com/user-attachments/assets/041c2e7c-3187-4c6d-adf4-4e87c1f1f3af" alt="image" style="width:50%;">
+
+
+
+6. Enter the URL in the search box. In this example we are using NGROK. https://admin:password@test.ngrok-free.app/swaig
+
+<img src="https://github.com/user-attachments/assets/88de4b11-c08f-460b-b53d-bf22a611be75" alt="image" style="width:50%;">
+
+
+7. Click the checkbox for `get_weather` then click the `create` button.
+
+
+<img src="https://github.com/user-attachments/assets/5a73fa7c-1f02-4c46-be47-a0972681a3f7" alt="image" style="width:50%;">
+
+
+8. Then click the `save` button.
+
+<img src="https://github.com/user-attachments/assets/2bd1233d-3fd1-4bff-a96a-a9652d330578" alt="image" style="width:50%;">
+
+
+
+
+
