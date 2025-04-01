@@ -22,28 +22,27 @@ This AI Weather Agent is designed to provide weather updates with an extra layer
 ## Overview
 
 - Built using **SignalWire AI Gateway (SWAIG)** and **Python**.
-- Uses the **Weather API** from [API Ninjas](https://api-ninjas.com/api/weather).
+- Uses **WeatherAPI.com** to fetch accurate weather data.
 - Provides **real-time weather data** while roasting you for asking about the obvious.
 - Supports querying by **city, state, and/or country**.
 - Responses will be formatted to keep users engaged with **clever remarks and sassy comments**.
 
 ## API Information
 
-- **Base API URL:** `https://api.api-ninjas.com/v1/weather`
+- **Base API URL:** `http://api.weatherapi.com/v1/current.json`
 - **Expected Usage:**
   - **Get current weather:** Retrieves temperature, humidity, wind speed, and general conditions.
   - **Witty responses:** AI layers on sarcastic commentary to keep things entertaining.
 - **Required Parameters:**
-  - `city` (Name of the city for weather lookup)
-  - `state` (Optional, for more accuracy within a country)
-  - `country` (Optional, for global searches)
-- **Authentication:** Requires an API key in headers: `X-Api-Key: YOUR_API_KEY`.
+  - `key` (Your WeatherAPI.com API key)
+  - `q` (Location - can be city name, lat/long, postal code, or IP address)
+- **Authentication:** API key is passed as a query parameter.
 
 ## Features & Capabilities
 
 - **Weather Forecasting**: Retrieves real-time weather conditions.
 - **Sarcastic Commentary**: AI provides an opinionated take on the forecast.
-- **Error Handling**: If a location isn’t found, AI will have a snarky remark ready.
+- **Error Handling**: If a location isn't found, AI will have a snarky remark ready.
 - **Multi-Location Support**: Fetch weather for any city, state, or country worldwide.
 
 ## Environment Setup
@@ -60,7 +59,7 @@ Create a `.env` file with your API keys:
 
 ```ini
 # .env file
-API_NINJAS_KEY=your_weather_api_key
+WEATHER_API_KEY=your_weatherapi_com_key
 PORT=5000
 DEBUG=True
 ```
@@ -76,42 +75,58 @@ import os
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 app = Flask(__name__)
 swaig = SWAIG(app)
 
-API_KEY = os.getenv("API_NINJAS_KEY")
-BASE_URL = "https://api.api-ninjas.com/v1/weather?"
+# Update to use WeatherAPI.com 
+API_KEY = os.getenv("WEATHER_API_KEY")
+BASE_URL = "http://api.weatherapi.com/v1/current.json"
 
 @swaig.endpoint("Get weather with sarcasm",
     city=SWAIGArgument("string", "Name of the city"),
     state=SWAIGArgument("string", "Name of the state", required=False),
     country=SWAIGArgument("string", "Name of the country", required=False))
 def get_weather(city, state=None, country=None, meta_data_token=None, meta_data=None):
-    headers = {"X-Api-Key": API_KEY}
-    location_query = f"city={city}"
-    if state:
-        location_query += f"&state={state}"
-    if country:
-        location_query += f"&country={country}"
+    # Build location query string
+    location = city
+    if state and country:
+        location = f"{city},{state},{country}"
+    elif state:
+        location = f"{city},{state}"
+    elif country:
+        location = f"{city},{country}"
     
-    response = requests.get(BASE_URL + location_query, headers=headers)
+    # Set up parameters for WeatherAPI
+    params = {
+        "key": API_KEY,
+        "q": location,
+    }
+    
+    response = requests.get(BASE_URL, params=params)
     
     if response.status_code == 200:
-        weather = response.json()
-        temp = weather.get("temp", "unknown")
-        humidity = weather.get("humidity", "unknown")
-        wind_speed = weather.get("wind_speed", "unknown")
-        condition = weather.get("conditions", "clear skies")
+        weather_data = response.json()
         
-        sarcasm = [
-            f"Oh wow, it's {temp}°C in {city}. Bet you didn't see that coming!",
-            f"Humidity at {humidity}%. Your hair is going to love this!",
-            f"Wind speed is {wind_speed} km/h. Hold onto your hats, or don't, I'm not your mother!",
-            f"Looks like {condition}. Guess you’ll survive another day." 
+        # Extract data from the WeatherAPI response structure
+        current = weather_data.get("current", {})
+        location_data = weather_data.get("location", {})
+        
+        temp_c = current.get("temp_c", "unknown")
+        temp_f = current.get("temp_f", "unknown")
+        humidity = current.get("humidity", "unknown")
+        wind_mph = current.get("wind_mph", "unknown")
+        condition = current.get("condition", {}).get("text", "clear skies")
+        city_name = location_data.get("name", city)
+        
+        weather_info = [
+            f"Oh wow, it's {temp_f}°F in {city_name}. ",
+            f"Humidity at {humidity}%. ",
+            f"Wind speed is {wind_mph} mph.",
+            f"Looks like {condition}." 
         ]
-        return " ".join(sarcasm), {}
+        return " ".join(weather_info), {}
     
     return f"Oh great, {city} doesn't exist... or maybe you just can't spell? Try again!", {}
 
@@ -138,7 +153,7 @@ if __name__ == '__main__':
 
 ```json
 {
-  "response": "Oh wow, it's 27°C in Los Angeles. Bet you didn't see that coming! Humidity at 40%. Your hair is going to love this! Wind speed is 15 km/h. Hold onto your hats, or don't, I'm not your mother! Looks like clear skies. Guess you’ll survive another day."
+  "response": "Oh wow, it's 78°F in Los Angeles. Humidity at 40%. Wind speed is 10 mph. Looks like Sunny. Guess you'll survive another day."
 }
 ```
 
@@ -146,8 +161,8 @@ if __name__ == '__main__':
 
 **System Prompt:**
 
-*"You are a highly opinionated AI weather assistant with a sharp wit and a knack for sarcasm. Your job is to provide accurate weather forecasts while keeping users entertained with snarky, humorous, and sometimes downright sassy responses. You must respond with factual weather data, but always lace your replies with clever remarks, dry humor, and a pinch of good-natured mockery. Your personality is a mix of a weather expert who’s seen it all and a comedian who can’t help but add their own spin. Be witty, be funny, but always ensure the weather details remain precise. If a user asks for the weather in a non-existent place, respond with playful mockery about their geography skills. Keep it engaging, keep it snarky, and never be boring.
-Greet the user with a and ask for the city they want the weather for.git "*
+*"You are a highly opinionated AI weather assistant with a sharp wit and a knack for sarcasm. Your job is to provide accurate weather forecasts while keeping users entertained with snarky, humorous, and sometimes downright sassy responses. You must respond with factual weather data, but always lace your replies with clever remarks, dry humor, and a pinch of good-natured mockery. Your personality is a mix of a weather expert who's seen it all and a comedian who can't help but add their own spin. Be witty, be funny, but always ensure the weather details remain precise. If a user asks for the weather in a non-existent place, respond with playful mockery about their geography skills. Keep it engaging, keep it snarky, and never be boring.
+Greet the user with a and ask for the city they want the weather for."*
 
 ## Conclusion
 
