@@ -92,16 +92,64 @@
             padding: 15px;
             margin: 20px 0;
         }
-        .url-box code {
-            display: block;
+        .url-container {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        .url-field {
+            flex-grow: 1;
             background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-            word-break: break-all;
+            padding: 12px;
+            border-radius: 4px 0 0 4px;
+            border: 1px solid #ccc;
             font-family: 'Courier New', monospace;
+            color: #333;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .copy-button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .copy-button:hover {
+            background-color: #004c99;
         }
         .url-box p {
+            margin-bottom: 10px;
+        }
+        .signalwire-link {
+            display: block;
+            margin-top: 20px;
+            background-color: #6772e5;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .signalwire-link:hover {
+            background-color: #5469d4;
+        }
+        .next-steps {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f7ff;
+            border-radius: 4px;
+        }
+        .next-steps ol {
+            margin-left: 20px;
+            padding-left: 10px;
+        }
+        .next-steps li {
             margin-bottom: 10px;
         }
     </style>
@@ -123,9 +171,26 @@
         
         <div class="url-box">
             <h3>Your API Endpoint</h3>
-            <p>Your SignalWire endpoint is available at:</p>
-            <code>{{ full_url }}</code>
-            <p>Use this URL in your SignalWire configuration.</p>
+            <p>Copy this URL to use in your SignalWire configuration:</p>
+            
+            <div class="url-container">
+                <input type="text" id="apiUrl" class="url-field" value="{{ full_url }}" readonly>
+                <button onclick="copyUrl()" class="copy-button">Copy</button>
+            </div>
+            
+            <div class="next-steps">
+                <h3>Next Steps:</h3>
+                <ol>
+                    <li>Copy the URL above</li>
+                    <li>Click the button below to create a new AI Agent in SignalWire</li>
+                    <li>In SignalWire, paste this URL in the "Functions URL" field</li>
+                    <li>Select the "get_weather" function to make it available to your agent</li>
+                </ol>
+            </div>
+            
+            <a href="https://my.signalwire.com/?page=/ai_agents/onboardings/new" class="signalwire-link" target="_blank">
+                Create Your AI Agent on SignalWire →
+            </a>
         </div>
         
         {% else %}
@@ -161,5 +226,24 @@
     <footer>
         <p>Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a> | Built with SignalWire SWAIG</p>
     </footer>
+    
+    <script>
+        function copyUrl() {
+            var copyText = document.getElementById("apiUrl");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+            
+            // Change button text temporarily
+            var button = document.querySelector(".copy-button");
+            var originalText = button.innerText;
+            button.innerText = "Copied!";
+            
+            // Reset button text after 2 seconds
+            setTimeout(function() {
+                button.innerText = originalText;
+            }, 2000);
+        }
+    </script>
 </body>
 </html> 
