@@ -1,6 +1,6 @@
 from typing import overload
 from flask import Flask, request, jsonify
-from signalwire_swaig.core import SWAIG, SWAIGArgument
+from signalwire_swaig.swaig import SWAIG, SWAIGArgument
 import os
 import requests
 from dotenv import load_dotenv
