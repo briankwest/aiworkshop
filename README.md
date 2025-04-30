@@ -1,5 +1,7 @@
 # AI Weather Agent - Witty & Sarcastic Edition
 
+[![Try in Replit](https://replit.com/badge/github/briankwest/aiworkshop)](https://replit.com/github/briankwest/aiworkshop)
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
