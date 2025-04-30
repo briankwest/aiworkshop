@@ -61,8 +61,7 @@ def home():
     # Determine the full URL for the SWAIG endpoint
     # This handles cases where the app might be behind a proxy
     host = request.host
-    scheme = request.scheme
-    full_url = f"{scheme}://{host}/swaig"
+    full_url = f"https://{host}/swaig"
     
     return render_template('index.html', 
                           has_api_key=has_api_key,
