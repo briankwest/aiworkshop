@@ -225,6 +225,7 @@ def swml_handler():
     # Determine the base URL for SWAIG endpoints
     host = request.host
     swaig_url = f"https://{host}/swaig"
+    postprompt_url = f"https://{host}/postprompt"
     
     # Create a new SWML instance
     swml = SignalWireSWML(version="1.0.0")
@@ -253,8 +254,7 @@ def swml_handler():
     
     # Add AI parameters
     swml.add_aiparams({
-        "post_prompt_silence_ms": "1000",  # Wait 1 second after prompts
-        "end_of_speech_timeout": "2000"
+        "postprompt_url": postprompt_url
     })
     
     # Set AI post prompt
@@ -284,6 +284,18 @@ def swml_handler():
     else:
         # For POST requests, return the JSON directly for API consumers
         return swml_json, {'Content-Type': 'application/json'}
+
+@app.route('/postprompt', methods=['POST'])
+def postprompt():
+    try:
+        data = request.get_json(force=True)
+        import pprint
+        pprint.pprint(data)
+        print(json.dumps(data, indent=2))
+        return jsonify({"status": "ok"})
+    except Exception as e:
+        print(f"Error in /postprompt: {e}")
+        return jsonify({"status": "error", "error": str(e)}), 400
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=os.getenv('PORT', 5000), debug=os.getenv('DEBUG', False))
