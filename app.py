@@ -225,7 +225,7 @@ def swml_handler():
     # Determine the base URL for SWAIG endpoints
     host = request.host
     swaig_url = f"https://{host}/swaig"
-    postprompt_url = f"https://{host}/postprompt"
+    post_prompt_url = f"https://{host}/postprompt"
     
     # Create a new SWML instance
     swml = SignalWireSWML(version="1.0.0")
@@ -254,7 +254,7 @@ def swml_handler():
     
     # Add AI parameters
     swml.add_aiparams({
-        "postprompt_url": postprompt_url
+        "post_prompt_url": post_prompt_url
     })
     
     # Set AI post prompt
