@@ -162,58 +162,64 @@
         
         {% if has_api_key %}
         <div class="status configured">
-            <h3>✅ API Key Configured!</h3>
-            <p>Your WeatherAPI.com key is saved and ready to use. Enjoy your sarcastic weather forecasts!</p>
+            <h3>✅ Configuration Saved!</h3>
+            <ul>
+                <li><strong>WeatherAPI Key:</strong> {{ api_key }}</li>
+                <li><strong>Space Name:</strong> {{ space_name }}</li>
+                <li><strong>Project ID:</strong> {{ project_id }}</li>
+                <li><strong>Token:</strong> {{ token[:4] + '...' if token }}</li>
+            </ul>
             <form action="/clear-key" method="post">
-                <button type="submit">Reset API Key</button>
+                <button type="submit">Reset Configuration</button>
             </form>
         </div>
         
+
+       
+        {% if call_address and call_token %}
         <div class="url-box">
-            <h3>Your API Endpoint</h3>
-            <p>Copy this URL to use in your SignalWire configuration:</p>
-            
-            <div class="url-container">
-                <input type="text" id="apiUrl" class="url-field" value="{{ full_url }}" readonly>
-                <button onclick="copyUrl()" class="copy-button">Copy</button>
-            </div>
-            
-            <div class="next-steps">
-                <h3>Next Steps:</h3>
-                <ol>
-                    <li>Copy the URL above</li>
-                    <li>Click the button below to create a new AI Agent in SignalWire</li>
-                    <li>In SignalWire, paste this URL in the "Functions URL" field</li>
-                    <li>Select the "get_weather" function to make it available to your agent</li>
-                </ol>
-            </div>
-            
-            <a href="https://my.signalwire.com/?page=/ai_agents/onboardings/new" class="signalwire-link" target="_blank">
-                Create Your AI Agent on SignalWire →
-            </a>
+            <h3>Call Your AI Agent Now!</h3>
+            <p>Click the button below to instantly call your AI agent using the SignalWire Call Widget.</p>
+            <button id="callButton">Call WeatherBot</button>
+            <c2c-widget
+              buttonId="callButton"
+              token="{{ call_token }}"
+              callDetails='{"destination": "{{ call_address }}", "supportsVideo": false, "supportsAudio": true}'
+              collectUserDetails="false"
+            ></c2c-widget>
+            <script src="https://cdn.jsdelivr.net/npm/@niravcodes/call-widget/dist/c2c-widget-full.umd.min.js"></script>
+            <p style="margin-top: 1em; font-size: 0.95em; color: #555;">You can also embed this widget in your own site for instant click-to-call functionality.</p>
         </div>
+        {% endif %}
         
         {% else %}
         <div class="warning">
-            <h3>⚠️ API Key Required</h3>
-            <p>To use this weather app, you need to provide your WeatherAPI.com API key.</p>
+            <h3>⚠️ API Key & SignalWire Info Required</h3>
+            <p>To use this weather app, you need to provide your WeatherAPI.com API key and SignalWire credentials.</p>
         </div>
         
         <div class="api-key-form">
-            <h3>Enter your WeatherAPI.com API Key</h3>
-            <p>Don't have an API key? <a href="https://www.weatherapi.com/signup.aspx" target="_blank">Sign up for free at WeatherAPI.com</a></p>
-            
+            <h3>Enter your Configuration</h3>
             <form action="/" method="post">
-                <input type="text" id="api_key" name="api_key" placeholder="Enter your WeatherAPI.com API key" required>
-                <button type="submit">Save API Key</button>
+                <label for="api_key">WeatherAPI.com API Key:</label>
+                <input type="text" id="api_key" name="api_key" placeholder="Enter your WeatherAPI.com API key" value="{{ api_key or '' }}" required>
+                
+                <label for="space_name">SignalWire Space Name:</label>
+                <input type="text" id="space_name" name="space_name" placeholder="e.g. example.signalwire.com" value="{{ space_name or '' }}" required>
+                
+                <label for="project_id">SignalWire Project ID:</label>
+                <input type="text" id="project_id" name="project_id" placeholder="Your SignalWire Project ID" value="{{ project_id or '' }}" required>
+                
+                <label for="token">SignalWire Token:</label>
+                <input type="text" id="token" name="token" placeholder="Your SignalWire Token" value="{{ token or '' }}" required>
+                
+                <button type="submit">Save Configuration</button>
             </form>
-            
             {% if error_message %}
             <div class="error">
                 <p>{{ error_message }}</p>
             </div>
             {% endif %}
-            
             {% if test_result %}
             <div class="success">
                 <p>{{ test_result }}</p>
@@ -224,7 +230,7 @@
     </div>
     
     <footer>
-        <p>Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a> | Built with SignalWire SWAIG</p>
+        <p>Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a> | Built with <a href="https://signalwire.ai/" title="SignalWire AI Agent">SignalWire AI Agent</a></p>
     </footer>
     
     <script>
