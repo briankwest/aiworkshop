@@ -271,11 +271,11 @@ def swml_handler():
         "top_p": 0.9
     })
 
-    swml.add_pronunciation({
+    swml.add_aipronounce({
         "replace": "\u00b0F",
         "pronunciation": "degrees Fahrenheit"
     })
-    swml.add_pronunciation({
+    swml.add_aipronounce({
         "replace": "mph",
         "pronunciation": "miles per hour"
     })
