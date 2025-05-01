@@ -11,88 +11,93 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 40px 32px;
-            color: #23272f;
-            background: linear-gradient(120deg, #f8fafc 0%, #e3e9f3 100%);
+            color: #e3e6eb;
+            background: linear-gradient(120deg, #23272f 0%, #2d323c 100%);
         }
         h1, h2 {
-            color: #2563eb;
+            color: #8ecaff;
             letter-spacing: -1px;
         }
         .container {
-            background: #fff;
-            padding: 40px 36px;
-            border-radius: 24px;
-            margin-top: 40px;
-            box-shadow: 0 6px 32px rgba(30,41,59,0.10), 0 1.5px 4px rgba(30,41,59,0.04);
+            background: #262a33;
+            padding: 44px 40px;
+            border-radius: 22px;
+            margin-top: 44px;
+            box-shadow: 0 6px 32px rgba(30,41,59,0.13), 0 1.5px 4px rgba(30,41,59,0.07);
             transition: box-shadow 0.2s;
         }
         .container:hover {
-            box-shadow: 0 12px 48px rgba(30,41,59,0.13), 0 2px 8px rgba(30,41,59,0.06);
+            box-shadow: 0 12px 48px rgba(30,41,59,0.18), 0 2px 8px rgba(30,41,59,0.10);
         }
         .api-key-form {
-            margin: 32px 0;
+            margin: 36px 0;
         }
         input[type="text"] {
             width: 100%;
             padding: 16px;
             margin: 14px 0;
-            border: 1.5px solid #e0e7ef;
+            border: 1.5px solid #3a3f4b;
             border-radius: 12px;
             font-size: 17px;
-            background: #f6f8fa;
+            background: #23262e;
+            color: #e3e6eb;
             transition: border-color 0.2s, box-shadow 0.2s;
-            box-shadow: 0 1px 2px rgba(30,41,59,0.03);
+            box-shadow: 0 1px 2px rgba(30,41,59,0.06);
         }
         input[type="text"]:focus {
-            border-color: #2563eb;
+            border-color: #8ecaff;
             outline: none;
-            box-shadow: 0 0 0 2px #2563eb22;
+            box-shadow: 0 0 0 2px #8ecaff33;
         }
-        button {
-            background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
-            color: white;
+        button, .swml-link {
+            background: linear-gradient(90deg, #4f8cff 0%, #7fd7ff 100%);
+            color: #f8fafc;
             border: none;
             padding: 16px 32px;
             border-radius: 12px;
             cursor: pointer;
             font-size: 17px;
             font-weight: 600;
-            box-shadow: 0 2px 8px rgba(30,41,59,0.07);
+            box-shadow: 0 2px 8px rgba(30,41,59,0.10);
             transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+            margin-top: 18px;
+            display: inline-block;
+            text-decoration: none;
         }
-        button:hover {
-            background: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 100%);
-            box-shadow: 0 4px 16px rgba(30,41,59,0.10);
+        button:hover, .swml-link:hover {
+            background: linear-gradient(90deg, #3b6fc1 0%, #5ec6e7 100%);
+            box-shadow: 0 4px 16px rgba(30,41,59,0.13);
             transform: translateY(-2px) scale(1.03);
         }
         .error {
-            color: #b91c1c;
-            background: #fef2f2;
+            color: #f7bdbd;
+            background: #2d2323;
             padding: 14px;
             border-radius: 10px;
             margin: 14px 0;
-            border: 1px solid #fecaca;
+            border: 1px solid #a15b5b;
         }
         .success {
-            color: #15803d;
-            background: #f0fdf4;
+            color: #b6f7d6;
+            background: #23302d;
             padding: 14px;
             border-radius: 10px;
             margin: 14px 0;
-            border: 1px solid #bbf7d0;
+            border: 1px solid #4fa387;
         }
         .status {
-            margin: 28px 0;
-            padding: 20px;
+            margin: 32px 0;
+            padding: 22px;
             border-radius: 14px;
         }
         .configured {
-            background: #f0fdf4;
-            border: 1.5px solid #bbf7d0;
+            background: #23302d;
+            border: 1.5px solid #4fa387;
         }
         .warning {
-            background: #fff7ed;
-            border: 1.5px solid #fdba74;
+            background: #2d2923;
+            border: 1.5px solid #e7c86a;
+            color: #f7e7b6;
             padding: 20px;
             border-radius: 14px;
             margin-bottom: 28px;
@@ -100,18 +105,18 @@
         footer {
             margin-top: 48px;
             padding-top: 24px;
-            border-top: 1.5px solid #e0e7ef;
+            border-top: 1.5px solid #353a44;
             font-size: 1em;
-            color: #7b8794;
+            color: #8a94a7;
             text-align: center;
         }
         .url-box {
-            background: #f0f7ff;
-            border: 1.5px solid #2563eb;
+            background: #232a36;
+            border: 1.5px solid #4f8cff;
             border-radius: 16px;
-            padding: 24px;
-            margin: 28px 0;
-            box-shadow: 0 2px 8px rgba(30,41,59,0.06);
+            padding: 28px;
+            margin: 32px 0;
+            box-shadow: 0 2px 8px rgba(30,41,59,0.10);
         }
         .url-container {
             display: flex;
@@ -120,20 +125,20 @@
         }
         .url-field {
             flex-grow: 1;
-            background: #f6f8fa;
+            background: #23262e;
             padding: 16px;
             border-radius: 8px 0 0 8px;
-            border: 1.5px solid #e0e7ef;
+            border: 1.5px solid #3a3f4b;
             font-family: 'JetBrains Mono', 'Courier New', monospace;
-            color: #23272f;
+            color: #e3e6eb;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
             font-size: 16px;
         }
         .copy-button {
-            background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
-            color: white;
+            background: linear-gradient(90deg, #4f8cff 0%, #7fd7ff 100%);
+            color: #f8fafc;
             border: none;
             padding: 16px 18px;
             border-radius: 0 8px 8px 0;
@@ -142,8 +147,8 @@
             transition: background 0.2s, box-shadow 0.2s;
         }
         .copy-button:hover {
-            background: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 100%);
-            box-shadow: 0 2px 8px rgba(30,41,59,0.10);
+            background: linear-gradient(90deg, #3b6fc1 0%, #5ec6e7 100%);
+            box-shadow: 0 2px 8px rgba(30,41,59,0.13);
         }
         .url-box p {
             margin-bottom: 12px;
@@ -151,8 +156,8 @@
         .signalwire-link {
             display: block;
             margin-top: 24px;
-            background: linear-gradient(90deg, #6772e5 0%, #a5b4fc 100%);
-            color: white;
+            background: linear-gradient(90deg, #6a8ee7 0%, #a7d7fc 100%);
+            color: #f8fafc;
             padding: 18px;
             text-align: center;
             border-radius: 10px;
@@ -162,12 +167,12 @@
             transition: background 0.2s;
         }
         .signalwire-link:hover {
-            background: linear-gradient(90deg, #5469d4 0%, #818cf8 100%);
+            background: linear-gradient(90deg, #4a6bb3 0%, #7fc6e7 100%);
         }
         .next-steps {
-            margin-top: 28px;
-            padding: 20px;
-            background: #f0f7ff;
+            margin-top: 32px;
+            padding: 22px;
+            background: #232a36;
             border-radius: 12px;
         }
         .next-steps ol {
@@ -176,24 +181,6 @@
         }
         .next-steps li {
             margin-bottom: 12px;
-        }
-        .swml-link {
-            display: inline-block;
-            background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 17px;
-            box-shadow: 0 2px 8px rgba(30,41,59,0.07);
-            transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
-            margin-top: 18px;
-        }
-        .swml-link:hover {
-            background: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 100%);
-            box-shadow: 0 4px 16px rgba(30,41,59,0.10);
-            transform: translateY(-2px) scale(1.03);
         }
     </style>
 </head>
