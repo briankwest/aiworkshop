@@ -270,6 +270,15 @@ def swml_handler():
         "pom": build_weather_agent_prompt(),
         "top_p": 0.9
     })
+
+    swml.add_pronunciation({
+        "replace": "\u00b0F",
+        "pronunciation": "degrees Fahrenheit"
+    })
+    swml.add_pronunciation({
+        "replace": "mph",
+        "pronunciation": "miles per hour"
+    })
     
     # Add the AI application to the main section
     swml.add_aiapplication("main")
