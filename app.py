@@ -259,7 +259,6 @@ def swml_handler():
     # Add AI parameters
     swml.add_aiparams({
         "post_prompt_silence_ms": 1000,  # Wait 1 second after prompts
-        "debug_webhook_level": 1,
         "end_of_speech_timeout": 2000
     })
     
