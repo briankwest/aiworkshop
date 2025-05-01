@@ -249,7 +249,7 @@ def swml_handler():
     swml.add_ailanguage({
         "code": "en-US",
         "name": "English",
-        "voice": "openai.alloy"  # Using OpenAI Alloy voice
+        "voice": "elevenlabs.josh"  # Using ElevenLabs Josh voice
     })
     
     # Set AI post prompt URL
