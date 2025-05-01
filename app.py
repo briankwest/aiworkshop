@@ -252,8 +252,8 @@ def swml_handler():
         "voice": "openai.alloy"  # Using OpenAI Alloy voice
     })
     
-    # Add AI parameters
-    swml.add_aiparams({
+    # Set AI post prompt URL
+    swml.set_aipost_prompt_url({
         "post_prompt_url": post_prompt_url
     })
     
