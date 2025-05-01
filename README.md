@@ -1,6 +1,15 @@
 # AI Weather Agent - Witty & Sarcastic Edition
 
-[![Try in Replit](https://replit.com/badge/github/briankwest/aiworkshop)](https://replit.com/github/briankwest/aiworkshop)
+
+
+## Quick Start on Replit
+
+1. Go to SignalWire.com and get your API credentials. [Get your SignalWire API credentials](https://developer.signalwire.com/platform/dashboard/getting-started/your-signalwire-api-space)
+2. Go to WeatherAPI.com and sign up for your API key. [Sign up for WeatherAPI.com](https://www.weatherapi.com/signup.aspx)
+3. Click [![Try in Replit](https://replit.com/badge/github/briankwest/aiworkshop)](https://replit.com/github/briankwest/aiworkshop)
+4. Import this project from GitHub if you haven't already.
+5. Click the run .replit command (or the green Run button at the top of the Replit interface).
+6. Fill out the form in the web UI with your WeatherAPI and SignalWire credentials.
 
 ## Table of Contents
 
