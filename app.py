@@ -236,11 +236,6 @@ def swml_handler():
         "stereo": True
     })
     
-    # Set up SWAIG defaults
-    swml.add_aiswaigdefaults({
-        "web_hook_url": swaig_url
-    })
-    
     # Include our get_weather function
     swml.add_aiinclude({
         "url": swaig_url,
@@ -258,8 +253,8 @@ def swml_handler():
     
     # Add AI parameters
     swml.add_aiparams({
-        "post_prompt_silence_ms": 1000,  # Wait 1 second after prompts
-        "end_of_speech_timeout": 2000
+        "post_prompt_silence_ms": "1000",  # Wait 1 second after prompts
+        "end_of_speech_timeout": "2000"
     })
     
     # Set AI post prompt
@@ -271,7 +266,7 @@ def swml_handler():
     
     # Set AI prompt using POM
     swml.set_aiprompt({
-        "temperature": 0.7,  # Higher temperature for more creativity
+        "temperature": 0.9,  # Higher temperature for more creativity
         "pom": build_weather_agent_prompt(),
         "top_p": 0.9
     })
