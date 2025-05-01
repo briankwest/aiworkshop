@@ -6,151 +6,194 @@
     <title>AI Weather Agent - Witty & Sarcastic Edition</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            line-height: 1.7;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
-            color: #333;
+            padding: 40px 32px;
+            color: #23272f;
+            background: linear-gradient(120deg, #f8fafc 0%, #e3e9f3 100%);
         }
         h1, h2 {
-            color: #0066cc;
+            color: #2563eb;
+            letter-spacing: -1px;
         }
         .container {
-            background-color: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: #fff;
+            padding: 40px 36px;
+            border-radius: 24px;
+            margin-top: 40px;
+            box-shadow: 0 6px 32px rgba(30,41,59,0.10), 0 1.5px 4px rgba(30,41,59,0.04);
+            transition: box-shadow 0.2s;
+        }
+        .container:hover {
+            box-shadow: 0 12px 48px rgba(30,41,59,0.13), 0 2px 8px rgba(30,41,59,0.06);
         }
         .api-key-form {
-            margin: 20px 0;
+            margin: 32px 0;
         }
         input[type="text"] {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 16px;
+            margin: 14px 0;
+            border: 1.5px solid #e0e7ef;
+            border-radius: 12px;
+            font-size: 17px;
+            background: #f6f8fa;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 2px rgba(30,41,59,0.03);
+        }
+        input[type="text"]:focus {
+            border-color: #2563eb;
+            outline: none;
+            box-shadow: 0 0 0 2px #2563eb22;
         }
         button {
-            background-color: #0066cc;
+            background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
+            padding: 16px 32px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(30,41,59,0.07);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
         }
         button:hover {
-            background-color: #004c99;
+            background: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 100%);
+            box-shadow: 0 4px 16px rgba(30,41,59,0.10);
+            transform: translateY(-2px) scale(1.03);
         }
         .error {
-            color: #cc0000;
-            background-color: #ffeeee;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
+            color: #b91c1c;
+            background: #fef2f2;
+            padding: 14px;
+            border-radius: 10px;
+            margin: 14px 0;
+            border: 1px solid #fecaca;
         }
         .success {
-            color: #006600;
-            background-color: #eeffee;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
+            color: #15803d;
+            background: #f0fdf4;
+            padding: 14px;
+            border-radius: 10px;
+            margin: 14px 0;
+            border: 1px solid #bbf7d0;
         }
         .status {
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 4px;
+            margin: 28px 0;
+            padding: 20px;
+            border-radius: 14px;
         }
         .configured {
-            background-color: #e6ffe6;
-            border: 1px solid #99cc99;
+            background: #f0fdf4;
+            border: 1.5px solid #bbf7d0;
         }
         .warning {
-            background-color: #fff8e6;
-            border: 1px solid #ffcc66;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
+            background: #fff7ed;
+            border: 1.5px solid #fdba74;
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 28px;
         }
         footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            font-size: 0.9em;
-            color: #666;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1.5px solid #e0e7ef;
+            font-size: 1em;
+            color: #7b8794;
             text-align: center;
         }
         .url-box {
-            background-color: #e9f7fe;
-            border: 1px solid #0066cc;
-            border-radius: 4px;
-            padding: 15px;
-            margin: 20px 0;
+            background: #f0f7ff;
+            border: 1.5px solid #2563eb;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 28px 0;
+            box-shadow: 0 2px 8px rgba(30,41,59,0.06);
         }
         .url-container {
             display: flex;
             align-items: center;
-            margin: 15px 0;
+            margin: 18px 0;
         }
         .url-field {
             flex-grow: 1;
-            background-color: #f0f0f0;
-            padding: 12px;
-            border-radius: 4px 0 0 4px;
-            border: 1px solid #ccc;
-            font-family: 'Courier New', monospace;
-            color: #333;
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 8px 0 0 8px;
+            border: 1.5px solid #e0e7ef;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            color: #23272f;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            font-size: 16px;
         }
         .copy-button {
-            background-color: #0066cc;
+            background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
             color: white;
             border: none;
-            padding: 12px 15px;
-            border-radius: 0 4px 4px 0;
+            padding: 16px 18px;
+            border-radius: 0 8px 8px 0;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
+            transition: background 0.2s, box-shadow 0.2s;
         }
         .copy-button:hover {
-            background-color: #004c99;
+            background: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 100%);
+            box-shadow: 0 2px 8px rgba(30,41,59,0.10);
         }
         .url-box p {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .signalwire-link {
             display: block;
-            margin-top: 20px;
-            background-color: #6772e5;
+            margin-top: 24px;
+            background: linear-gradient(90deg, #6772e5 0%, #a5b4fc 100%);
             color: white;
-            padding: 15px;
+            padding: 18px;
             text-align: center;
-            border-radius: 4px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s;
+            font-size: 1.1em;
+            transition: background 0.2s;
         }
         .signalwire-link:hover {
-            background-color: #5469d4;
+            background: linear-gradient(90deg, #5469d4 0%, #818cf8 100%);
         }
         .next-steps {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f0f7ff;
-            border-radius: 4px;
+            margin-top: 28px;
+            padding: 20px;
+            background: #f0f7ff;
+            border-radius: 12px;
         }
         .next-steps ol {
-            margin-left: 20px;
-            padding-left: 10px;
+            margin-left: 24px;
+            padding-left: 12px;
         }
         .next-steps li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+        }
+        .swml-link {
+            display: inline-block;
+            background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            box-shadow: 0 2px 8px rgba(30,41,59,0.07);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+            margin-top: 18px;
+        }
+        .swml-link:hover {
+            background: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 100%);
+            box-shadow: 0 4px 16px rgba(30,41,59,0.10);
+            transform: translateY(-2px) scale(1.03);
         }
     </style>
 </head>
@@ -190,7 +233,7 @@
             <script src="https://cdn.jsdelivr.net/npm/@niravcodes/call-widget/dist/c2c-widget-full.umd.min.js"></script>
             <p style="margin-top: 1em; font-size: 0.95em; color: #555;">You can also embed this widget in your own site for instant click-to-call functionality.</p>
             {% if swml_url %}
-            <a href="{{ swml_url }}" target="_blank" style="display:inline-block;margin-top:18px;padding:10px 18px;background:#0066cc;color:#fff;border-radius:4px;text-decoration:none;font-weight:bold;">View the SWML for this Agent</a>
+            <a href="{{ swml_url }}" target="_blank" class="swml-link">View the SWML for this Agent</a>
             {% endif %}
         </div>
         {% endif %}
