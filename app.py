@@ -144,8 +144,11 @@ def home():
 
 @app.route('/clear-key', methods=['POST'])
 def clear_key():
-    if 'WEATHER_API_KEY' in session:
-        session.pop('WEATHER_API_KEY')
+    global weather_api_key
+    weather_api_key = None
+    for key in ['WEATHER_API_KEY', 'SPACE_NAME', 'PROJECT_ID', 'TOKEN', 'CALL_ADDRESS', 'CALL_TOKEN']:
+        if key in session:
+            session.pop(key)
     return redirect(url_for('home'))
 
 @swaig.endpoint("Get weather with sarcasm",
