@@ -4,7 +4,7 @@
 
 ## Quick Start on Replit
 
-1. [Get your SignalWire API credentials](https://developer.signalwire.com/platform/dashboard/getting-started/your-signalwire-api-space)
+1. [Get your SignalWire API credentials](https://my.signalwire.com/?page=/credentials)
 2. [Sign up for a free WeatherAPI.com](https://www.weatherapi.com/signup.aspx)
 3. Click [![Try in Replit](https://replit.com/badge/github/briankwest/aiworkshop)](https://replit.com/github/briankwest/aiworkshop)
 4. In Replit click "Import from GitHub"
