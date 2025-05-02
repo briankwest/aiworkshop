@@ -249,9 +249,12 @@ def swml_handler():
     swml.add_ailanguage({
         "code": "en-US",
         "name": "English",
-        "voice": "elevenlabs.josh"  # Using ElevenLabs Josh voice
+        "voice": "elevenlabs.adam"  # Using ElevenLabs Adam voice
     })
-    
+    swml.add_aiparams({
+        "video_idle_file": "https://mcdn.signalwire.com/videos/robot_idle2.mp4",
+        "video_talking_file": "https://mcdn.signalwire.com/videos/robot_talking2.mp4"
+    })
     # Set AI post prompt URL
     swml.set_aipost_prompt_url({
         "post_prompt_url": post_prompt_url
@@ -273,11 +276,11 @@ def swml_handler():
 
     swml.add_aipronounce({
         "replace": "\u00b0F",
-        "pronunciation": "degrees Fahrenheit"
+        "with": "degrees fahrenheit"
     })
     swml.add_aipronounce({
         "replace": "mph",
-        "pronunciation": "miles per hour"
+        "with": "miles per hour"
     })
     
     # Add the AI application to the main section
