@@ -145,10 +145,59 @@ def home():
 @app.route('/clear-key', methods=['POST'])
 def clear_key():
     global weather_api_key
+    
+    # Get SignalWire credentials from session
+    space_name = session.get('SPACE_NAME')
+    project_id = session.get('PROJECT_ID')
+    token = session.get('TOKEN')
+    
+    # Clean up SignalWire resources if credentials are available
+    if all([space_name, project_id, token]):
+        try:
+            from requests.auth import HTTPBasicAuth
+            auth = HTTPBasicAuth(project_id, token)
+            headers = {"Accept": "application/json"}
+            
+            # Delete the external SWML handler if we have an address
+            call_address = session.get('CALL_ADDRESS')
+            if call_address:
+                # Get the list of external SWML handlers
+                swml_url = f"https://{space_name}/api/fabric/resources/external_swml_handlers"
+                swml_resp = requests.get(swml_url, headers=headers, auth=auth)
+                if swml_resp.status_code == 200:
+                    handlers = swml_resp.json().get('data', [])
+                    # Find handlers with our name pattern
+                    for handler in handlers:
+                        if handler.get('name', '').startswith('AI Weather Workshop'):
+                            handler_id = handler.get('id')
+                            if handler_id:
+                                # Delete the handler
+                                del_url = f"https://{space_name}/api/fabric/resources/external_swml_handlers/{handler_id}"
+                                requests.delete(del_url, headers=headers, auth=auth)
+            
+            # Also delete any guest subscribers (like in cleanup.py)
+            sub_url = f"https://{space_name}/api/fabric/resources/subscribers"
+            sub_resp = requests.get(sub_url, headers=headers, auth=auth)
+            if sub_resp.status_code == 200:
+                subscribers = sub_resp.json().get('data', [])
+                # Find guest subscribers
+                for sub in subscribers:
+                    if sub.get('display_name', '').startswith('Guest-'):
+                        sub_id = sub.get('id')
+                        if sub_id:
+                            # Delete the subscriber
+                            del_sub_url = f"https://{space_name}/api/fabric/resources/subscribers/{sub_id}"
+                            requests.delete(del_sub_url, headers=headers, auth=auth)
+                            
+        except Exception as e:
+            print(f"Error cleaning up resources: {str(e)}")
+    
+    # Clear session data
     weather_api_key = None
     for key in ['WEATHER_API_KEY', 'SPACE_NAME', 'PROJECT_ID', 'TOKEN', 'CALL_ADDRESS', 'CALL_TOKEN']:
         if key in session:
             session.pop(key)
+    
     return redirect(url_for('home'))
 
 @swaig.endpoint("Get weather with sarcasm",

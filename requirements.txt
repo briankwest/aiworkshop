@@ -3,5 +3,5 @@ jsonschema==4.23.0
 python-dotenv==1.1.0
 Requests==2.32.3
 signalwire_pom==2.7
-signalwire_swaig==2.7
+signalwire_swaig==2.7.1
 signalwire_swml==2.7
